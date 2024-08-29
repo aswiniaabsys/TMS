@@ -1,0 +1,197 @@
+<!-- DEBUG-VIEW START 1 APPPATH\Views\_base\head.php -->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <meta Http-Equiv="Cache-Control" Content="no-cache">
+      <meta Http-Equiv="Pragma" Content="no-cache">
+      <meta Http-Equiv="Expires" Content="0">
+      <title>Task Logging - iCompass - AABSyS IT Pvt Ltd</title>
+      <link rel="shortcut icon" href="https://hrmis.aabsys.com/assets/images/icon/favicon.png" title="iCompass" />
+      <link rel="stylesheet" href="https://hrmis.aabsys.com/assets/dist/frontend/maxcdn.bootstrap.min.css">
+      <link href='https://hrmis.aabsys.com/assets/dist/frontend/lib.min.css' rel='stylesheet' media='screen'>
+      <link href='https://hrmis.aabsys.com/assets/dist/frontend/app.min.css' rel='stylesheet' media='screen'>
+      <link href='https://hrmis.aabsys.com/assets/dist/frontend/styles.css' rel='stylesheet' media='screen'>
+      <link href='https://hrmis.aabsys.com/assets/dist/frontend/jquery-ui.css' rel='stylesheet' media='screen'>
+      <link href='https://hrmis.aabsys.com/assets/dist/frontend/select2.min.css' rel='stylesheet' media='screen'>
+      <script src='https://hrmis.aabsys.com/assets/dist/frontend/jquery-code.js'></script>
+      <script src='https://hrmis.aabsys.com/assets/dist/frontend/jquery-ui.js'></script>
+      <script src='https://hrmis.aabsys.com/assets/dist/frontend/bootstrap.min.js'></script>
+      <script src='https://hrmis.aabsys.com/assets/dist/frontend/ui-bootstrap-tpls.min.js'></script>
+      <link rel="stylesheet" href="https://hrmis.aabsys.com/assets/dist/frontend/default.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+
+         .footer {
+    position: absolute;
+    bottom: 0px;
+}
+.tab-content {
+    margin-bottom: 60px;
+}
+.table-responsive {
+    /* min-height: .01%; */
+    overflow-x: auto;
+    overflow-y: auto;
+    /* height: 500px; */
+    max-height: 500px;
+}
+      </style>
+   <body class="main-section">
+      <div class="row pkhead">
+         <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+               <div class="ml-0">
+                  <div class="logo">
+                     <a href="https://hrmis.aabsys.com/home">
+                        <img src="https://hrmis.aabsys.com/assets/images/aabsys_logo.png" alt="AABSyS">
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Change Password Modal -->
+      <div class="menu-section">
+         <div class="container">
+            <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <p class="navbar-text visible-xs-inline-block">I Compass MENU</p>
+               <div class="collapse navbar-collapse navbar-menubuilder">
+                  <ul class="nav navbar-nav navbar-left responsive slider">
+                     <li class="list-item ">
+                         <a href="{% url 'tools' %}" >Internal Tools</a>
+                         <a href='#' >Request Tool</a>
+                         <a href="{% url 'sut' %}">Software Usage Tracking</a>
+                     </li>
+
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="section main-section" >
+      <div class="container">
+         <div class="form-content page-content">
+            <div class="mt mb">
+               <div class="col-md-12 center-xs">
+                  <div class="row">
+                     <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                           <div class="row well">
+                  <div style="margin-left: 50px;margin-right: 50px;" class="msg"></div>
+                  <form method="post">
+                  <div class="row pkdsearch mb-0 brd-0">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                           <label>Project</label>
+                            {% csrf_token %}
+                           <select name="searchProject"  class="form-control" >
+                               <option >None</option>
+                               {% for project_name in tools.unique_projects %}
+                               <option >{{project_name}}</option>
+                               {% endfor %}
+
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label>Platform</label>
+                           <select name="searchPlatform" class="form-control" >
+                               <option >None</option>
+                               {% for platform_name in tools.unique_platform %}
+                               <option >{{platform_name}}</option>
+                               {% endfor %}
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label>Developer</label>
+                           <select name="searchFile_name" class="form-control" >
+                               <option >None</option>
+                               {% for developer in tools.unique_developer %}
+                               <option >{{developer}}</option>
+                               {% endfor %}
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <label>Keyword</label>
+                        <input type="text" name="searchKeyword"  placeholder="Keyword" class="form-control input-sm ng-pristine ng-untouched ng-valid ng-empty">
+                     </div>
+
+                     <div class="col-md-6" style="text-align: right;">
+                         <button type="submit" class="btn btn-primary ml-xs-4 ml-sm-4 mt-4">Search</button>
+                     </div>
+                  </div>
+                </form><br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-condensed table-45">
+                        <thead>
+                            <tr class="info">
+                                <th>Sl. No.</th>
+                                <th>Project</th>
+                                <th>Project Type</th>
+                                <th>Vertical</th>
+                                <th>Platform</th>
+                                <th>Developer</th>
+                                <th>Tool_name</th>
+                                <th>Command</th>
+                                <th>Technology</th>
+                                <th>Tool Description</th>
+                                <th>Year of creation</th>
+                                <th>Repository</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="job_table">
+                            {% for tool in tools.tools %}
+                            <tr>
+                                <td>{{ tool.sl_no }}</td>
+                                <td>{{ tool.project_name }}</td>
+                                <td>{{ tool.project_type }}</td>
+                                <td>{{ tool.vertical }}</td>
+                                <td>{{ tool.platform }}</td>
+                                <td>{{ tool.developer }}</td>
+                                <td>{{ tool.tool_name }}</td>
+                                <td>{{ tool.command }}</td>
+                                <td>{{ tool.technology }}</td>
+                                <td>{{ tool.tool_description }}</td>
+                                <td>{{ tool.year_of_creation }}</td>
+                                <td><a href="{{ tool.repository_path }}" target="_blank"><i class="fa fa-link"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                    </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+         </div>
+      </div>
+
+   </body>
+</html>
+<div class="footer">
+   <div class="container">
+      <p class="pull-right text-muted">
+         Icompass Version: <strong>2.0</strong>,
+      </p>
+      <p class="text-muted">&copy; <strong> 2024</strong> All rights reserved.</p>
+   </div>
+</div>
